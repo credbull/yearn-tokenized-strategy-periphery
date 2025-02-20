@@ -216,6 +216,22 @@ contract Setup is ExtendedTest, Clonable {
     }
 
     function _setTokenAddrs() internal {
+        block.chainid == 42161 ? _setTokenAddrsArbitrum() : _setTokenAddrsEthereum();
+    }
+
+    // arbitrum mainnet
+    function _setTokenAddrsArbitrum() internal {
+        tokenAddrs["WBTC"] = 0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f;
+        tokenAddrs["YFI"] = 0x82e3A8F066a6989666b031d916c43672085b1582;
+        tokenAddrs["WETH"] = 0x82aF49447D8a07e3bd95BD0d56f35241523fBab1;
+        tokenAddrs["LINK"] = 0xf97f4df75117a78c1A5a0DBb814Af92458539FB4;
+        tokenAddrs["USDT"] = 0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9;
+        tokenAddrs["DAI"] = 0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1;
+        tokenAddrs["USDC"] = 0xaf88d065e77c8cC2239327C5EDb3A432268e5831;
+    }
+
+    // ethereum mainnet addresses
+    function _setTokenAddrsEthereum() internal {
         tokenAddrs["WBTC"] = 0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599;
         tokenAddrs["YFI"] = 0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e;
         tokenAddrs["WETH"] = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;

@@ -140,6 +140,7 @@ contract TokenizedStakerTest is Setup {
     function test_TokenizedStaker_getReward() public {
         uint256 amount = 1_000e18;
         mintAndDepositIntoStrategy(IStrategy(address(staker)), user, amount);
+        uint256 prevRewardToken2Balance = rewardToken2.balanceOf(user);
 
         // Add multiple reward tokens
         vm.prank(management);
@@ -166,7 +167,7 @@ contract TokenizedStakerTest is Setup {
         staker.getReward();
 
         assertEq(rewardToken.balanceOf(user), rewardAmount / 2);
-        assertEq(rewardToken2.balanceOf(user), rewardAmount / 2);
+        assertEq(rewardToken2.balanceOf(user), rewardAmount / 2 + prevRewardToken2Balance);
         assertEq(staker.rewards(user, address(rewardToken)), 0);
         assertEq(staker.rewards(user, address(rewardToken2)), 0);
     }
@@ -174,6 +175,7 @@ contract TokenizedStakerTest is Setup {
     function test_TokenizedStaker_getOneReward() public {
         uint256 amount = 1_000e18;
         mintAndDepositIntoStrategy(IStrategy(address(staker)), user, amount);
+        uint256 prevRewardToken2Balance = rewardToken2.balanceOf(user);
 
         // Add multiple reward tokens
         vm.prank(management);
@@ -197,7 +199,8 @@ contract TokenizedStakerTest is Setup {
         staker.getOneReward(address(rewardToken));
 
         assertEq(rewardToken.balanceOf(user), rewardAmount / 2);
-        assertEq(rewardToken2.balanceOf(user), 0);
+        assertEq(rewardToken2.balanceOf(user), prevRewardToken2Balance);
+
         assertEq(staker.rewards(user, address(rewardToken)), 0);
         assertEq(staker.rewards(user, address(rewardToken2)), rewardAmount / 2);
     }

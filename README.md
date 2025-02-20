@@ -10,14 +10,27 @@ NOTE: If you are on a windows machine it is recommended to use [WSL](https://lea
 
 ### Fork this repository
 
+```sh
     git clone --recursive https://github.com/user/tokenized-strategy-periphery
 
     cd tokenized-strategy-periphery
+```
 
-    pip install vyper==0.3.7
+Set up your python virtual environment and activate it.
 
-    yarn
+```
+# must use python3 v3.10 for vyper 0.3.7
+/opt/homebrew/bin/python3.10 -m venv venv
+source venv/bin/activate
+```
 
+Install requirements.
+
+```
+# pip install vyper==0.3.7
+python3 -m pip install vyper==0.3.7
+yarn
+```
 
 ### Set your environment Variables
 

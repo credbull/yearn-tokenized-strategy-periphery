@@ -23,6 +23,13 @@ contract UniswapV2SwapperTest is Setup {
             address(new MockUniswapV2Swapper(address(asset)))
         );
 
+        uniV2Swapper.setBase(address(base));
+
+        // see: https://docs.uniswap.org/contracts/v2/reference/smart-contracts/v2-deployments
+        if (block.chainid == 42161) {
+            uniV2Swapper.setRouter(address(0x4752ba5DBc23f44D87826276BF6Fd6b1C372aD24));
+        }
+
         uniV2Swapper.setKeeper(keeper);
         uniV2Swapper.setPerformanceFeeRecipient(performanceFeeRecipient);
         uniV2Swapper.setPendingManagement(management);

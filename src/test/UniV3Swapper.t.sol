@@ -22,6 +22,7 @@ contract UniswapV3SwapperTest is Setup {
             address(new MockUniswapV3Swapper(address(asset)))
         );
 
+        uniV3Swapper.setBase(address(weth));
         uniV3Swapper.setKeeper(keeper);
         uniV3Swapper.setPerformanceFeeRecipient(performanceFeeRecipient);
         uniV3Swapper.setPendingManagement(management);

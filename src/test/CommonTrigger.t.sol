@@ -16,6 +16,10 @@ contract CommonTriggerTest is Setup {
 
     function setUp() public override {
         super.setUp();
+        // see: https://github.com/yearn/base-fee-provider
+        if (block.chainid == 42161) {
+            baseFeeProvider = 0x1ba4eB0F44AB82541E56669e18972b0d6037dfE0;
+        }
 
         commonTrigger = new CommonReportTrigger(daddy);
         customStrategyTrigger = new MockCustomStrategyTrigger();
